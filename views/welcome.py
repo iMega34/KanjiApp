@@ -30,7 +30,7 @@ def Welcome(page: ft.Page) -> ft.Column:
                 controls = [
                     ft.Container(
                         expand = True,
-                        height = 235,
+                        height = 150,
                     )
                 ]
             ),

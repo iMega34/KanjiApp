@@ -17,7 +17,6 @@ class Router:
         }
         self.window = ft.Container(
             content = self.routes['/'],
-            border = ft.border.all(2, "#FD0000"),
             expand = True
         )
 
