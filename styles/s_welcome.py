@@ -24,8 +24,17 @@ styles: dict = {
 
 
 class SWelcome:
+    """
+    Propiedades de los controles utilizados por la función :function:`Welcome`
+    del archivo :file:`welcome.py` para la creación de la ventana de bienvenida
+    """
 
     def app_name() -> ft.Container:
+        """
+        Nombre de la aplicación
+
+        Regresa un objeto de la clase :class:`ft.Container`
+        """
         app_name_content: ft.Container = ft.Container(
             expand = True,
             content = ft.Text(
@@ -41,6 +50,11 @@ class SWelcome:
 
 
     def subtitle() -> ft.Container:
+        """
+        Mensaje de bienvenida
+
+        Regresa un objeto de la clase :class:`ft.Container`
+        """
         subtitle_content: ft.Container = ft.Container(
             expand = True,
             content = ft.Text(
@@ -56,6 +70,11 @@ class SWelcome:
 
 
     def button_row() -> ft.Container:
+        """
+        Fila de botones para el redireccinamiento de ventana
+
+        Regresa un objeto de la clase :class:`ft.Container`
+        """
         button_row_content: ft.Container = ft.Container(
             expand = True,
             height = 200,
