@@ -18,7 +18,8 @@ styles: dict = {
             "font" : "Exo 2",
             "size" : 35,
             "height" : 75,
-            "width" : 325
+            "width" : 325,
+            "color" : "#E4D6A0"
         },
     }
 
@@ -39,10 +40,10 @@ class SWelcome:
             expand = True,
             content = ft.Text(
                 "KanjiApp",
-                text_align = ft.TextAlign.CENTER,
                 font_family = styles["app_name"]["font"],
                 size = styles["app_name"]["size"],
-                color = styles["text"]["color"]
+                color = styles["text"]["color"],
+                text_align = ft.TextAlign.CENTER
             )
         )
 
@@ -59,19 +60,22 @@ class SWelcome:
             expand = True,
             content = ft.Text(
                 "ようこそ",
-                text_align = ft.TextAlign.CENTER,
                 font_family = styles["subtitle"]["font"],
                 size = styles["subtitle"]["size"],
-                color = styles["text"]["color"]
+                color = styles["text"]["color"],
+                text_align = ft.TextAlign.CENTER
             )
         )
 
         return subtitle_content
 
 
-    def button_row() -> ft.Container:
+    def button_row(page: ft.Page) -> ft.Container:
         """
         Fila de botones para el redireccinamiento de ventana
+
+        Recibe un objeto de la clase :class:`ft.Page` para poder
+        realizar el redireccionamiento de ventanas
 
         Regresa un objeto de la clase :class:`ft.Container`
         """
@@ -86,7 +90,7 @@ class SWelcome:
                     ft.ElevatedButton(
                         height = styles["buttons"]["height"],
                         width = styles["buttons"]["width"],
-                        bgcolor = "#E4D6A0",
+                        bgcolor = styles["buttons"]["color"],
                         content = ft.Text(
                             "Lista de kanjis",
                             font_family = styles["buttons"]["font"],
@@ -100,7 +104,7 @@ class SWelcome:
                     ft.ElevatedButton(
                         height = styles["buttons"]["height"],
                         width = styles["buttons"]["width"],
-                        bgcolor = "#E4D6A0",
+                        bgcolor = styles["buttons"]["color"],
                         content = ft.Text(
                             "Aprender",
                             font_family = styles["buttons"]["font"],
@@ -108,13 +112,14 @@ class SWelcome:
                             color = styles["text"]["color"],
                             weight = ft.FontWeight.W_300,
                             text_align = ft.TextAlign.CENTER
-                        )
+                        ),
+                        on_click = lambda _: page.go('/learn_kanji')
                     ),
                     # Botón hacia la ventana de vocabulario
                     ft.ElevatedButton(
                         height = styles["buttons"]["height"],
                         width = styles["buttons"]["width"],
-                        bgcolor = "#E4D6A0",
+                        bgcolor = styles["buttons"]["color"],
                         content = ft.Text(
                             "Vocabulario",
                             font_family = styles["buttons"]["font"],

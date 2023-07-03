@@ -11,8 +11,7 @@ def Welcome(page: ft.Page) -> ft.Column:
     Se muestra el nombre de la aplicación, un mensaje de bienvenida
     y los botones de las ventanas a las que se puede dirigir el usuario
 
-    Utiliza los controles declarados en la clase :class:`SWelcome` del
-    archivo :file:`s_welcome.py`
+    Utiliza los controles declarados en la clase :class:`SWelcome` del archivo :file:`s_welcome.py`
 
     Regresa un objeto de la clase :class:`ft.Column`
     """
@@ -23,9 +22,9 @@ def Welcome(page: ft.Page) -> ft.Column:
         # Se compone de:
         # - Control de texto con el nombre la aplicación
         # - Control de texto con mensaje de bienvenida
-        # - Tres botones que redireccionan a ventanas distintas 
+        # - Tres botones que redireccionan a ventanas distintas
         controls = [
-            # Espacio en blanco de 275px de altura
+            # Espacio en blanco de 150px de altura
             ft.Row(
                 controls = [
                     ft.Container(
@@ -49,7 +48,7 @@ def Welcome(page: ft.Page) -> ft.Column:
             # Fila de botones de redireccionamiento de ventana
             ft.Row(
                 controls = [
-                    SWelcome.button_row()
+                    SWelcome.button_row(page)
                 ]
             )
         ]
