@@ -8,6 +8,7 @@ def main(page: ft.Page):
     # Propiedades de la ventana
     page.title = "KanjiApp"
     page.bgcolor = "#D9D9D9"
+    page.window_title_bar_hidden = True
     page.window_full_screen = True
 
     # Declaración del router de la clase Router para redireccionar
@@ -21,7 +22,7 @@ def main(page: ft.Page):
     page.add(router.window)
 
     # Se accede a la ventana de bienvenida
-    page.go('/learn_kanji')
+    page.go('/')
 
 
 ft.app(target = main)

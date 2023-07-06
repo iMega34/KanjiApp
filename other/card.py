@@ -6,44 +6,44 @@ from other.kanji import Kanji
 
 # Estilos usados por los controles que componen la ventana
 styles: dict = {
-        "text" : {
-            "font" : "Exo 2",
-            "size" : 50,
-            "color" : "#032E2C"
-        },
-        "kanji" : {
-            "font" : "Noto Serif JP",
-            "size" : 250,
-            "color" : "#000000",
-            "height" : 450,
-            "width" : 480,
-        },
-        "on_kun" : {
-            "font" : "Sawarabi Mincho",
-            "size" : 30,
-            "spacing" : 15,
-        },
-        "vocab_title" : {
-            "size" : 60
-        },
-        "vocab_word" : {
-            "font" : "Sawarabi Mincho",
-            "size" : 50
-        },
-        "buttons" : {
-            "size" : 35,
-            "height" : 75,
-            "width" : 325,
-            "color" : "#E4D6A0"
-        },
-        "card" : {
-            "height" : 650,
-            "width" : 530,
-            "padding" : 25,
-            "color" : "#D2E5EB",
-            "shadow_color" : "#A6A6A6"
-        }
+    "text" : {
+        "font" : "Exo 2",
+        "size" : 50,
+        "color" : "#032E2C"
+    },
+    "kanji" : {
+        "font" : "Noto Serif JP",
+        "size" : 250,
+        "color" : "#000000",
+        "height" : 450,
+        "width" : 480,
+    },
+    "on_kun" : {
+        "font" : "Sawarabi Mincho",
+        "size" : 30,
+        "spacing" : 15,
+    },
+    "vocab_title" : {
+        "size" : 60
+    },
+    "vocab_word" : {
+        "font" : "Sawarabi Mincho",
+        "size" : 50
+    },
+    "buttons" : {
+        "size" : 35,
+        "height" : 75,
+        "width" : 325,
+        "color" : "#E4D6A0"
+    },
+    "card" : {
+        "height" : 650,
+        "width" : 530,
+        "padding" : 25,
+        "color" : "#D2E5EB",
+        "shadow_color" : "#A6A6A6"
     }
+}
 
 
 class Card:

@@ -9,15 +9,27 @@ def LearnKanji(page: ft.Page) -> ft.Container:
     Ventana de aprendizaje de kanjis
 
     Se muestra una columna con el kanji a aprender, su significado y sus lecturas en on'yomi y kun'yomi,
-    seguido de otra columna con el vocabulario relacionado al kanji mostrado en pantalla
+    seguido de otra columna con el vocabulario relacionado al kanji mostrado en pantalla y un botón para
+    generar una nueva tarjeta con un kanji aleatorio
 
     Utiliza los controles declarados en la clase :class:`SLearnKanji` del archivo :file:`s_learn_kanji.py`
 
     Regresa un objeto de la clase :class:`ft.Container`
     """
 
+    # Permite la generación de un nuevo kanji para mostrar en pantalla
+    def new_kanji(func) -> None:
+        kanji_card.controls[0] = SLearnKanji.kanji_info()
+        page.update()
+
     # Propiedades de la ventana de aprendizaje de kanjis
     page.padding = 100
+
+    # Primer kanji que se mostrará en pantalla
+    kanji_card: ft.Column = SLearnKanji.kanji_info()
+    # Botón para generar un nuevo kanji
+    new_kanji_button: ft.ElevatedButton = SLearnKanji.new_kanji_button()
+    new_kanji_button.on_click = new_kanji
 
     window: ft.Container = ft.Container(
         expand = True,
@@ -29,7 +41,8 @@ def LearnKanji(page: ft.Page) -> ft.Container:
             expand = True,
             controls = [
                 # Tarjeta del kanji
-                SLearnKanji.kanji_info()
+                kanji_card,
+                new_kanji_button
             ]
         )
     )

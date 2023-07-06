@@ -2,26 +2,27 @@
 import flet as ft
 
 
+# Estilos usados por los controles que componen la ventana
 styles: dict = {
-        "text" : {
-            "color" : "#032E2C"
-        },
-        "app_name" : {
-            "font" : "Exo 2",
-            "size" : 125
-        },
-        "subtitle" : {
-            "font" : "Sawarabi Mincho",
-            "size" : 100
-        },
-        "buttons" : {
-            "font" : "Exo 2",
-            "size" : 35,
-            "height" : 75,
-            "width" : 325,
-            "color" : "#E4D6A0"
-        },
-    }
+    "text" : {
+        "color" : "#032E2C"
+    },
+    "app_name" : {
+        "font" : "Exo 2",
+        "size" : 92
+    },
+    "subtitle" : {
+        "font" : "Sawarabi Mincho",
+        "size" : 80
+    },
+    "buttons" : {
+        "font" : "Exo 2",
+        "size" : 40,
+        "height" : 75,
+        "width" : 325,
+        "color" : "#E4D6A0"
+    },
+}
 
 
 class SWelcome:

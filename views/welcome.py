@@ -16,6 +16,13 @@ def Welcome(page: ft.Page) -> ft.Column:
     Regresa un objeto de la clase :class:`ft.Column`
     """
 
+    # Nombre de la aplicación
+    app_name: ft.Text = SWelcome.app_name()
+    # Mensaje de bienvenida
+    subtitle: ft.Text = SWelcome.subtitle()
+    # Fila de botones de redireccionamiento de ventana
+    button_row: ft.Row = SWelcome.button_row(page)
+
     # Propiedades de la ventana de bienvenida
     window: ft.Column = ft.Column(
         spacing = 25,
@@ -29,26 +36,26 @@ def Welcome(page: ft.Page) -> ft.Column:
                 controls = [
                     ft.Container(
                         expand = True,
-                        height = 150,
+                        height = 100,
                     )
                 ]
             ),
             # Nombre de la aplicación
             ft.Row(
                 controls = [
-                    SWelcome.app_name()
+                    app_name
                 ]
             ),
             # Mensaje de bienvenida
             ft.Row(
                 controls = [
-                    SWelcome.subtitle()
+                    subtitle
                 ]
             ),
             # Fila de botones de redireccionamiento de ventana
             ft.Row(
                 controls = [
-                    SWelcome.button_row(page)
+                    button_row
                 ]
             )
         ]
