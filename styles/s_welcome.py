@@ -20,7 +20,9 @@ styles: dict = {
         "size" : 40,
         "height" : 75,
         "width" : 325,
-        "color" : "#E4D6A0"
+        "row_height" : 200,
+        "row_spacing" : 75,
+        "color" : "#E4D6A0",
     },
 }
 
@@ -82,10 +84,10 @@ class SWelcome:
         """
         button_row_content: ft.Container = ft.Container(
             expand = True,
-            height = 200,
+            height = styles["buttons"]["row_height"],
             content = ft.Row(
                 alignment = ft.MainAxisAlignment.CENTER,
-                spacing = 75,
+                spacing = styles["buttons"]["row_spacing"],
                 controls = [
                     # Botón hacia la ventana de lista de kanjis
                     ft.ElevatedButton(
@@ -128,7 +130,8 @@ class SWelcome:
                             color = styles["text"]["color"],
                             weight = ft.FontWeight.W_300,
                             text_align = ft.TextAlign.CENTER
-                        )
+                        ),
+                        on_click = lambda _: page.go('/vocabulary')
                     )
                 ]
             )

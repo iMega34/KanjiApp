@@ -17,9 +17,9 @@ def Welcome(page: ft.Page) -> ft.Column:
     """
 
     # Nombre de la aplicación
-    app_name: ft.Text = SWelcome.app_name()
+    app_name: ft.Container = SWelcome.app_name()
     # Mensaje de bienvenida
-    subtitle: ft.Text = SWelcome.subtitle()
+    subtitle: ft.Container = SWelcome.subtitle()
     # Fila de botones de redireccionamiento de ventana
     button_row: ft.Row = SWelcome.button_row(page)
 

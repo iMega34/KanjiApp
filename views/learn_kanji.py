@@ -33,15 +33,16 @@ def LearnKanji(page: ft.Page) -> ft.Container:
 
     window: ft.Container = ft.Container(
         expand = True,
-        border = ft.border.all(1, "#FF0000"),
         # Se compone de:
         # - Columna con la tarjeta del kanji a aprender
         # - Columna con el vocabulario relacionado al kanji
+        # - Botón para generar un nuevo kanji
         content = ft.Row(
             expand = True,
             controls = [
                 # Tarjeta del kanji
                 kanji_card,
+                # Botón para cambio de kanji
                 new_kanji_button
             ]
         )

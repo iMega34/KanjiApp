@@ -3,6 +3,7 @@ import flet as ft
 
 from views.welcome import Welcome
 from views.learn_kanji import LearnKanji
+from views.vocabulary import Vocabulary
 
 
 class Router:
@@ -18,7 +19,7 @@ class Router:
             "/" : Welcome(page),                # Ventana de bienvenida
             # "/kanji_list" : KanjiList(page),    # Ventana de lista de kanjis
             "/learn_kanji" : LearnKanji(page),  # Ventana de aprendizaje
-            # "/vocabulary" : Vocabulary(page)    # Ventana de vocabulario
+            "/vocabulary" : Vocabulary(page)    # Ventana de vocabulario
         }
         # Ventana y ruta predeterminadas del router
         self.window = ft.Container(

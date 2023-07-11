@@ -62,6 +62,8 @@ class Card:
         """
         Construye la tarjeta del kanji a partir de un objeto de la clase :class:`Kanji`
 
+        Recibe un objeto de la clase :class:`Kanji` como parámetro
+
         Regresa un objeto de la clase :class:`ft.Container`
         """
 

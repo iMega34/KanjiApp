@@ -57,7 +57,7 @@ class SLearnKanji:
             ]
         )
 
-        # Garantiza que se las tarjetas se generen en orden y se repiten cuando se llega
+        # Garantiza que se las tarjetas se generen en orden y se repitan cuando se llega
         # al final de la lista
         if SLearnKanji._counter < (len(kanjis) - 1):
             SLearnKanji._counter += 1
