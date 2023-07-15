@@ -2,6 +2,7 @@
 import flet as ft
 
 from other.kanji import Kanji
+from other.audio_engine import AudioEngine
 
 
 # Estilos usados por los controles que componen la ventana
@@ -41,9 +42,13 @@ styles: dict = {
         "width" : 530,
         "padding" : 25,
         "color" : "#D2E5EB",
+        "sec_color" : "#B4E3EC",
         "shadow_color" : "#A6A6A6"
     }
 }
+
+# Motor de audio para la pronunciación del onyomi y kunyomi
+audio: AudioEngine = AudioEngine("JA-JP_HARUKA_11.0")
 
 
 class Card:
@@ -56,6 +61,15 @@ class Card:
 
     def __init__(self) -> None:
         self._card = ft.Container()
+
+
+    def _on_hover(_: ft.HoverEvent) -> None:
+        """
+        Permite a la tarjeta cambiar de color al pasar el cursor sobre ella
+        """
+
+        _.control.bgcolor = styles["card"]["sec_color"] if _.data == "true" else styles["card"]["color"]
+        _.control.update()
 
 
     def build_card(self, kanji: Kanji) -> ft.Container:
@@ -114,6 +128,7 @@ class Card:
                             # Columna de on'yomi
                             ft.Container(
                                 expand = True,
+                                border_radius = ft.border_radius.all(20),
                                 content = ft.Column(
                                     spacing = styles["on_kun"]["spacing"],
                                     controls = [
@@ -135,11 +150,14 @@ class Card:
                                             content = Card._build_onyomi_list(kanji)
                                         )
                                     ]
-                                )
+                                ),
+                                on_click = lambda _: audio.read(kanji.onyomi),
+                                on_hover = Card._on_hover
                             ),
                             # Columna de kun'yomi
                             ft.Container(
                                 expand = True,
+                                border_radius = ft.border_radius.all(20),
                                 content = ft.Column(
                                     spacing = styles["on_kun"]["spacing"],
                                     controls = [
@@ -161,7 +179,9 @@ class Card:
                                             content = Card._build_kunyomi_list(kanji)
                                         )
                                     ]
-                                )
+                                ),
+                                on_click = lambda _: audio.read(kanji.kunyomi),
+                                on_hover = Card._on_hover
                             )
                         ]
                     )

@@ -37,7 +37,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
         result = jam.lookup_iter(f'%{kanji}%', strict_lookup = True)
 
         # Diccionario que almacenará las palabras encontradas
-        vocabulary: dict[str: list[str]] = {
+        vocabulary: dict[str, list[str]] = {
             "word_kana" : [],
             "word_kanji" : [],
             "meaning" : []
