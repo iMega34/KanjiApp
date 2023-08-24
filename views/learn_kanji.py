@@ -2,6 +2,15 @@
 import flet as ft
 
 from styles.s_learn_kanji import SLearnKanji
+from other.nav_bar import NavBar
+
+styles: dict = {
+    "controls" : {
+        "width" : 150,
+        "height" : 75,
+        "border_radius" : 10,
+    },
+}
 
 
 def LearnKanji(page: ft.Page) -> ft.Container:
@@ -23,7 +32,10 @@ def LearnKanji(page: ft.Page) -> ft.Container:
         page.update()
 
     # Propiedades de la ventana de aprendizaje de kanjis
-    page.padding = 100
+    page.padding = 35
+
+    # Barra de navegación
+    nav_bar: ft.Container = NavBar.nav_bar(page)
 
     # Primer kanji que se mostrará en pantalla
     kanji_card: ft.Column = SLearnKanji.kanji_info()
@@ -34,16 +46,34 @@ def LearnKanji(page: ft.Page) -> ft.Container:
     window: ft.Container = ft.Container(
         expand = True,
         # Se compone de:
+        # - Barra de navegación
         # - Columna con la tarjeta del kanji a aprender
         # - Columna con el vocabulario relacionado al kanji
         # - Botón para generar un nuevo kanji
-        content = ft.Row(
+        content = ft.Column(
             expand = True,
             controls = [
-                # Tarjeta del kanji
-                kanji_card,
-                # Botón para cambio de kanji
-                new_kanji_button
+                # Barra de navegación
+                ft.Row(
+                    controls = [
+                        nav_bar
+                    ]
+                ),
+                # Espacio de la ventana
+                ft.Row(
+                    alignment = ft.MainAxisAlignment.CENTER,
+                    controls = [
+                        # Tarjeta del kanji
+                        kanji_card,
+                        # Botón para cambio de kanji
+                        ft.Column(
+                            alignment = ft.MainAxisAlignment.CENTER,
+                            controls = [
+                                new_kanji_button
+                            ]
+                        )
+                    ]
+                )
             ]
         )
     )

@@ -4,6 +4,7 @@ from jamdict import Jamdict
 
 from styles.s_vocabulary import SVocabulary
 from other.kanji import Kanji
+from other.nav_bar import NavBar
 
 
 def Vocabulary(page: ft.Page) -> ft.Container:
@@ -66,7 +67,10 @@ def Vocabulary(page: ft.Page) -> ft.Container:
 
 
     # Propiedades de la ventana de aprendizaje de kanjis
-    page.padding = 100
+    page.padding = 35
+
+    # Barra de navegación
+    nav_bar: ft.Container = NavBar.nav_bar(page)
 
     vocabulary: dict[str: list[str]] = _search_vocab("月")
 
@@ -83,6 +87,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
     window: ft.Container = ft.Container(
         expand = True,
         # Se compone de:
+        # - Barra de navegación
         # - El título de la ventana
         # - Una barra de búsqueda para ingresar un kanji o una palabra
         # - Un control con dos columnas de vocabulario que suman 50 palabras asociadas a la búsqueda
@@ -90,6 +95,12 @@ def Vocabulary(page: ft.Page) -> ft.Container:
             expand = True,
             spacing = 15,
             controls = [
+                # Barra de navegación
+                ft.Row(
+                    controls = [
+                        nav_bar
+                    ]
+                ),
                 # Título de la ventana
                 ft.Row(
                     controls = [
