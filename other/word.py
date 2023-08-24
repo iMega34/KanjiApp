@@ -54,6 +54,9 @@ class Word:
             bgcolor = styles["word_card"]["color"],
             padding = styles["word_card"]["padding"],
             content = ft.Row(
+                scroll = True,
+                auto_scroll = True,
+                on_scroll_interval = 0.1,
                 controls = [
                     ft.Container(
                         alignment = ft.alignment.center,

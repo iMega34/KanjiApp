@@ -62,7 +62,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
 
         kanji: str = search_bar.content.controls[0].value
         vocabulary = _search_vocab(kanji)
-        vocab_array.controls[:3] = SVocabulary.vocab_array(vocabulary).controls[:3]
+        vocab_array.controls[:3] = SVocabulary.display_vocab(vocabulary).controls[:3]
         page.update()
 
 
@@ -82,7 +82,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
     search_bar: ft.Container = SVocabulary.search_bar()
     search_bar.content.controls[1].on_click = new_search
     # Columna con el vocabulario encontrado
-    vocab_array: ft.Row = SVocabulary.vocab_array(vocabulary)
+    vocab_array: ft.Row = SVocabulary.display_vocab(vocabulary)
 
     window: ft.Container = ft.Container(
         expand = True,

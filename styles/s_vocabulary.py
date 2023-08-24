@@ -144,7 +144,7 @@ class SVocabulary:
         return search_bar_content
 
 
-    def vocab_array(vocab_dict: dict[str, list[str]]) -> ft.Row:
+    def display_vocab(vocab_dict: dict[str, list[str]]) -> ft.Row:
         """
         Resultados de la búsqueda de vocabulario para el kanji o palabra ingresados a la ventana
 
@@ -180,7 +180,7 @@ class SVocabulary:
                 list_view_2.controls.append(word)
                 column = 1
 
-        vocab_array_content: ft.Row = ft.Row(
+        display_vocab_content: ft.Row = ft.Row(
             alignment = ft.MainAxisAlignment.CENTER,
             spacing = 15,
             controls = [
@@ -200,5 +200,5 @@ class SVocabulary:
             ]
         )
 
-        return vocab_array_content
+        return display_vocab_content
 
