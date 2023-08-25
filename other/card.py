@@ -123,11 +123,12 @@ class Card:
                     ),
                     # On'yomi y kun'yomi
                     ft.Row(
-                        offset = ft.Offset(0, -0.6),
+                        offset = ft.Offset(0, -0.4),
                         controls = [
                             # Columna de on'yomi
                             ft.Container(
                                 expand = True,
+                                height = 150,
                                 border_radius = ft.border_radius.all(20),
                                 content = ft.Column(
                                     spacing = styles["on_kun"]["spacing"],
@@ -157,6 +158,7 @@ class Card:
                             # Columna de kun'yomi
                             ft.Container(
                                 expand = True,
+                                height = 150,
                                 border_radius = ft.border_radius.all(20),
                                 content = ft.Column(
                                     spacing = styles["on_kun"]["spacing"],
