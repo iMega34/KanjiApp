@@ -10,8 +10,8 @@ def LearnKanji(page: ft.Page) -> ft.Container:
     Ventana de aprendizaje de kanjis
 
     Se muestra una columna con el kanji a aprender, su significado y sus lecturas en on'yomi y kun'yomi,
-    seguido de otra columna con el vocabulario relacionado al kanji mostrado en pantalla y un botón para
-    generar una nueva tarjeta con un kanji aleatorio
+    seguido de otra columna con el vocabulario relacionado al kanji mostrado en pantalla y dos botones para
+    navegar entre las tarjetas de los kanjis en la lista.
 
     Utiliza los controles declarados en la clase :class:`SLearnKanji` del archivo :file:`s_learn_kanji.py`
 

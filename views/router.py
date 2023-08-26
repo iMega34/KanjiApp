@@ -4,6 +4,7 @@ import flet as ft
 from views.welcome import Welcome
 from views.learn_kanji import LearnKanji
 from views.vocabulary import Vocabulary
+from views.kanji_list import KanjiList
 
 
 class Router:
@@ -17,7 +18,7 @@ class Router:
         # Rutas que componen el programa
         self.routes = {
             "/" : Welcome(page),                # Ventana de bienvenida
-            # "/kanji_list" : KanjiList(page),    # Ventana de lista de kanjis
+            "/kanji_list" : KanjiList(page),    # Ventana de lista de kanjis
             "/learn_kanji" : LearnKanji(page),  # Ventana de aprendizaje
             "/vocabulary" : Vocabulary(page)    # Ventana de vocabulario
         }
