@@ -3,7 +3,6 @@ import flet as ft
 from jamdict import Jamdict
 
 from styles.s_vocabulary import SVocabulary
-from other.kanji import Kanji
 from other.nav_bar import NavBar
 
 
@@ -61,8 +60,8 @@ def Vocabulary(page: ft.Page) -> ft.Container:
         """
 
         kanji: str = search_bar.content.controls[0].value
-        vocabulary = _search_vocab(kanji)
-        vocabulary.controls[:3] = SVocabulary.build_vocab(vocabulary).controls[:3]
+        vocab_results = _search_vocab(kanji)
+        vocabulary.controls[:3] = SVocabulary.build_vocab(vocab_results).controls[:3]
         page.update()
 
 
@@ -72,7 +71,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
     # Barra de navegación
     nav_bar: ft.Container = NavBar.nav_bar(page)
 
-    vocabulary: dict[str: list[str]] = _search_vocab("月")
+    vocab_results: dict[str: list[str]] = _search_vocab("月")
 
     # Título de la ventana
     title: ft.Container = SVocabulary.title()
@@ -82,7 +81,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
     search_bar: ft.Container = SVocabulary.search_bar()
     search_bar.content.controls[1].on_click = new_search
     # Columna con el vocabulario encontrado
-    vocabulary: ft.Row = SVocabulary.build_vocab(vocabulary)
+    vocabulary: ft.Row = SVocabulary.build_vocab(vocab_results)
 
     window: ft.Container = ft.Container(
         expand = True,

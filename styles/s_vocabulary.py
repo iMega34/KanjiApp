@@ -180,7 +180,7 @@ class SVocabulary:
                 list_view_2.controls.append(word)
                 column = 1
 
-        display_vocab_content: ft.Row = ft.Row(
+        vocab_content: ft.Row = ft.Row(
             alignment = ft.MainAxisAlignment.CENTER,
             spacing = 15,
             controls = [
@@ -200,4 +200,4 @@ class SVocabulary:
             ]
         )
 
-        return display_vocab_content
+        return vocab_content
