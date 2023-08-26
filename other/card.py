@@ -44,6 +44,17 @@ styles: dict = {
         "color" : "#D2E5EB",
         "sec_color" : "#B4E3EC",
         "shadow_color" : "#A6A6A6"
+    },
+    "simple_card" : {
+        "height" : 275,
+        "width" : 275,
+        "kanji_size" : 150,
+        "meaning_size" : 35,
+        "kanji_color" : "#000000",
+        "bgcolor_light" : "#D2E5EB",
+        "sec_bgcolor_light" : "#C5E2E7",
+        "bgcolor_dark" : "#AED8E5",
+        "sec_bgcolor_dark" : "#C6E2EA",
     }
 }
 
@@ -65,10 +76,30 @@ class Card:
 
     def _on_hover(_: ft.HoverEvent) -> None:
         """
-        Permite a la tarjeta cambiar de color al pasar el cursor sobre ella
+        Permite al cuadro de lecturas cambiar de color al pasar el cursor sobre ella
         """
 
         _.control.bgcolor = styles["card"]["sec_color"] if _.data == "true" else styles["card"]["color"]
+        _.control.update()
+
+
+    def _light_card_on_hover(_: ft.HoverEvent) -> None:
+        """
+        Permite a la tarjeta simple cambiar de color al pasar el cursor sobre ella
+        """
+
+        _.control.bgcolor = styles["simple_card"]["sec_bgcolor_light"] if _.data == "true" else styles["simple_card"]["bgcolor_light"]
+
+        _.control.update()
+
+
+    def _dark_card_on_hover(_: ft.HoverEvent) -> None:
+        """
+        Permite a la tarjeta simple cambiar de color al pasar el cursor sobre ella
+        """
+
+        _.control.bgcolor = styles["simple_card"]["sec_bgcolor_dark"] if _.data == "true" else styles["simple_card"]["bgcolor_dark"]
+
         _.control.update()
 
 
@@ -194,6 +225,59 @@ class Card:
         return self._card
 
 
+    def build_simple_card(self, kanji: Kanji) -> ft.Container:
+        """
+        Construye la tarjeta del kanji a partir de un objeto de la clase :class:`Kanji`
+
+        Versión simplificada de la tarjeta del kanji, unicaménte contiene el kanji y su significado
+
+        Recibe un objeto de la clase :class:`Kanji` como parámetro
+
+        Regresa un objeto de la clase :class:`ft.Container`
+        """
+
+        self._card: ft.Container = ft.Container(
+            height = styles["simple_card"]["height"],
+            width = styles["simple_card"]["width"],
+            bgcolor = styles["simple_card"]["bgcolor_light"] if kanji.id % 2 == 0 else styles["simple_card"]["bgcolor_dark"],
+            # Contenido de la tarjeta del kanji
+            content = ft.Column(
+                alignment = ft.MainAxisAlignment.CENTER,
+                controls = [
+                    # Kanji y significado del kanji
+                    ft.Row(
+                        controls = [
+                            ft.Container(
+                                height = styles["simple_card"]["height"],
+                                width = styles["simple_card"]["width"],
+                                offset = ft.Offset(0, -0.04),
+                                alignment = ft.alignment.top_center,
+                                content = ft.Column(
+                                    controls = [
+                                        # Significado del kanji
+                                        ft.Container(
+                                            alignment = ft.alignment.center,
+                                            offset = ft.Offset(0, 0.75),
+                                            content = Card._get_simple_meaning(kanji)
+                                        ),
+                                        # Kanji
+                                        ft.Container(
+                                            alignment = ft.alignment.center,
+                                            content = Card._get_simple_kanji(kanji)
+                                        )
+                                    ]
+                                )
+                            )
+                        ]
+                    )
+                ]
+            ),
+            on_hover = Card._light_card_on_hover if kanji.id % 2 == 0 else Card._dark_card_on_hover
+        )
+
+        return self._card
+
+
     def _get_kanji(kanji: Kanji) -> ft.Text:
         """
         Obtiene el kanji del objeto de la clase :class:`Kanji`
@@ -210,7 +294,27 @@ class Card:
         )
 
         return kanji
-    
+
+
+    def _get_simple_kanji(kanji: Kanji) -> ft.Text:
+        """
+        Obtiene el kanji del objeto de la clase :class:`Kanji`
+        y lo regresa como un objeto de la clase :class:`ft.Text`
+
+        Versión simplificada del kanji, formato más pequeño
+        """
+
+        kanji: ft.Text = ft.Text(
+            kanji.kanji,
+            font_family = styles["kanji"]["font"],
+            size = styles["simple_card"]["kanji_size"],
+            color = styles["kanji"]["color"],
+            text_align = ft.TextAlign.CENTER,
+            selectable = True
+        )
+
+        return kanji
+
 
     def _get_meaning(kanji: Kanji) -> ft.Text:
         """
@@ -222,6 +326,26 @@ class Card:
             kanji.meaning,
             font_family = styles["text"]["font"],
             size = styles["text"]["size"],
+            color = styles["text"]["color"],
+            weight = ft.FontWeight.W_300,
+            text_align = ft.TextAlign.CENTER
+        )
+
+        return meaning
+
+
+    def _get_simple_meaning(kanji: Kanji) -> ft.Text:
+        """
+        Obtiene el significado del kanji del objeto de la clase :class:`Kanji`
+        y lo regresa como un objeto de la clase :class:`ft.Text`
+
+        Versión simplificada del significado, formato más pequeño
+        """
+
+        meaning: ft.Text = ft.Text(
+            kanji.meaning,
+            font_family = styles["text"]["font"],
+            size = styles["simple_card"]["meaning_size"],
             color = styles["text"]["color"],
             weight = ft.FontWeight.W_300,
             text_align = ft.TextAlign.CENTER
