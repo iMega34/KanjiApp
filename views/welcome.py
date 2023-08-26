@@ -18,6 +18,8 @@ def Welcome(page: ft.Page) -> ft.Column:
 
     # Nombre de la aplicación
     app_name: ft.Container = SWelcome.app_name()
+    # Botón para salir de la aplicación
+    exit_button: ft.Container = SWelcome.exit_button(page)
     # Mensaje de bienvenida
     subtitle: ft.Container = SWelcome.subtitle()
     # Fila de botones de redireccionamiento de ventana
@@ -31,32 +33,40 @@ def Welcome(page: ft.Page) -> ft.Column:
         # - Control de texto con mensaje de bienvenida
         # - Tres botones que redireccionan a ventanas distintas
         controls = [
-            # Espacio en blanco de 150px de altura
+            # Botón para salir de la aplicación
             ft.Row(
+                alignment = ft.MainAxisAlignment.END,
+                height = 75,
                 controls = [
-                    ft.Container(
-                        expand = True,
-                        height = 100,
-                    )
+                    exit_button
                 ]
             ),
-            # Nombre de la aplicación
-            ft.Row(
-                controls = [
-                    app_name
-                ]
-            ),
-            # Mensaje de bienvenida
-            ft.Row(
-                controls = [
-                    subtitle
-                ]
-            ),
-            # Fila de botones de redireccionamiento de ventana
-            ft.Row(
-                controls = [
-                    button_row
-                ]
+            ft.Container(
+                expand = True,
+                content = ft.Column(
+                    offset = ft.Offset(0, -0.025),
+                    alignment = ft.MainAxisAlignment.CENTER,
+                    controls = [
+                        # Nombre de la aplicación
+                        ft.Row(
+                            controls = [
+                                app_name
+                            ]
+                        ),
+                        # Mensaje de bienvenida
+                        ft.Row(
+                            controls = [
+                                subtitle
+                            ]
+                        ),
+                        # Fila de botones de redireccionamiento de ventana
+                        ft.Row(
+                            controls = [
+                                button_row
+                            ]
+                        )
+                    ]
+                )
             )
         ]
     )
