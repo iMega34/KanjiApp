@@ -71,7 +71,7 @@ class SVocabulary:
         )
 
         return title_content
-    
+
 
     def divider() -> ft.Container:
         """
@@ -87,7 +87,7 @@ class SVocabulary:
         )
 
         return divider_content
-    
+
 
     def search_bar() -> ft.Container:
         """
@@ -144,7 +144,7 @@ class SVocabulary:
         return search_bar_content
 
 
-    def display_vocab(vocab_dict: dict[str, list[str]]) -> ft.Row:
+    def build_vocab(vocab_dict: dict[str, list[str]]) -> ft.Row:
         """
         Resultados de la búsqueda de vocabulario para el kanji o palabra ingresados a la ventana
 
@@ -201,4 +201,3 @@ class SVocabulary:
         )
 
         return display_vocab_content
-

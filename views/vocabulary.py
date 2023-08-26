@@ -22,11 +22,11 @@ def Vocabulary(page: ft.Page) -> ft.Container:
     Regresa un objeto de la clase :class:`ft.Container`
     """
 
-    def _search_vocab(kanji: Kanji) -> dict[str, list[str]]:
+    def _search_vocab(kanji: str) -> dict[str, list[str]]:
         """
         Busca palabras asociada al kanji que se pasa como parámetro
 
-        Recibe un objeto de la clase :class:`Kanji`
+        Recibe un objeto de la clase :class:`str`
 
         Regresa un diccionario con las primeras 50 palabras encontradas en el diccionario JMDict
         """
@@ -62,7 +62,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
 
         kanji: str = search_bar.content.controls[0].value
         vocabulary = _search_vocab(kanji)
-        vocab_array.controls[:3] = SVocabulary.display_vocab(vocabulary).controls[:3]
+        vocabulary.controls[:3] = SVocabulary.build_vocab(vocabulary).controls[:3]
         page.update()
 
 
@@ -82,7 +82,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
     search_bar: ft.Container = SVocabulary.search_bar()
     search_bar.content.controls[1].on_click = new_search
     # Columna con el vocabulario encontrado
-    vocab_array: ft.Row = SVocabulary.display_vocab(vocabulary)
+    vocabulary: ft.Row = SVocabulary.build_vocab(vocabulary)
 
     window: ft.Container = ft.Container(
         expand = True,
@@ -125,7 +125,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
                 ft.Row(
                     alignment = ft.MainAxisAlignment.CENTER,
                     controls = [
-                        vocab_array
+                        vocabulary
                     ]
                 )
             ]
