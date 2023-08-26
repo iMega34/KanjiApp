@@ -20,7 +20,7 @@ def KanjiList(page: ft.Page) -> ft.Container:
     page.padding = 35
 
     # Barra de navegación
-    nav_bar: ft.Container = NavBar.nav_bar(page)
+    nav_bar: ft.Container = NavBar().nav_bar(page)
 
     # Título de la ventana
     title: ft.Container = SKanjiList.title()

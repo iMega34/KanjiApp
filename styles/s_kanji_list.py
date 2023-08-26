@@ -28,7 +28,7 @@ styles: dict = {
     "kanji_list" : {
         "spacing" : 10,
         "width" : 1415,
-        "height" : 560
+        "height" : 570
     }
 }
 
@@ -89,7 +89,7 @@ class SKanjiList:
             list_row: ft.Row = ft.Row()
             for kanji in range(5):
                 try:
-                    kanji_card: ft.Container = Card().build_simple_card(kanjis[_counter])
+                    kanji_card: ft.Card = Card().build_simple_card(kanjis[_counter])
                     list_row.controls.append(kanji_card)
                     _counter += 1
                 except IndexError:

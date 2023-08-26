@@ -39,7 +39,7 @@ styles: dict = {
         "color" : "#E4D6A0"
     },
     "card" : {
-        "height" : 650,
+        "height" : 665,
         "width" : 530,
         "padding" : 25,
         "color" : "#D2E5EB",
@@ -47,15 +47,13 @@ styles: dict = {
         "shadow_color" : "#A6A6A6"
     },
     "simple_card" : {
-        "height" : 275,
-        "width" : 275,
-        "kanji_size" : 150,
-        "meaning_size" : 35,
+        "height" : 265,
+        "width" : 265,
+        "kanji_size" : 145,
+        "meaning_size" : 30,
         "kanji_color" : "#000000",
         "bgcolor_light" : "#D2E5EB",
-        "sec_bgcolor_light" : "#C5E2E7",
         "bgcolor_dark" : "#AED8E5",
-        "sec_bgcolor_dark" : "#C6E2EA",
     }
 }
 
@@ -75,33 +73,50 @@ class Card:
         self._card = ft.Container()
 
 
-    def _on_hover(_: ft.HoverEvent) -> None:
+    def _onyomi_readings_on_hover(self, _: ft.HoverEvent) -> None:
         """
-        Permite al cuadro de lecturas cambiar de color al pasar el cursor sobre ella
-        """
-
-        _.control.bgcolor = styles["card"]["sec_color"] if _.data == "true" else styles["card"]["color"]
-        _.control.update()
-
-
-    def _light_card_on_hover(_: ft.HoverEvent) -> None:
-        """
-        Permite a la tarjeta simple cambiar de color al pasar el cursor sobre ella
+        Permite al cuadro de lecturas on'yomi elevarse al pasar el cursor sobre él
         """
 
-        _.control.bgcolor = styles["simple_card"]["sec_bgcolor_light"] if _.data == "true" else styles["simple_card"]["bgcolor_light"]
+        if _.data == "true":
+            for __ in range(20):
+                self._onyomi_readings.elevation += 1
+                self._onyomi_readings.update()
+        else:
+            for __ in range(20):
+                self._onyomi_readings.elevation -= 1
+                self._onyomi_readings.update()
 
-        _.control.update()
 
-
-    def _dark_card_on_hover(_: ft.HoverEvent) -> None:
+    def _kunyomi_readings_on_hover(self, _: ft.HoverEvent) -> None:
         """
-        Permite a la tarjeta simple cambiar de color al pasar el cursor sobre ella
+        Permite al cuadro de lecturas kun'yomi elevarse al pasar el cursor sobre él
         """
 
-        _.control.bgcolor = styles["simple_card"]["sec_bgcolor_dark"] if _.data == "true" else styles["simple_card"]["bgcolor_dark"]
+        if _.data == "true":
+            for __ in range(20):
+                self._kunyomi_readings.elevation += 1
+                self._kunyomi_readings.update()
+        else:
+            for __ in range(20):
+                self._kunyomi_readings.elevation -= 1
+                self._kunyomi_readings.update()
 
-        _.control.update()
+
+    def _simple_card_on_hover(self, _: ft.HoverEvent) -> None:
+        """
+        Permite a la tarjeta elevarse al pasar el cursor sobre ella
+        """
+
+        if _.data == "true":
+            for __ in range(20):
+                self._card.elevation += 1
+                self._card.update()
+
+        else:
+            for __ in range(20):
+                self._card.elevation -= 1
+                self._card.update()
 
 
     def build_card(self, kanji: Kanji) -> ft.Container:
@@ -112,6 +127,74 @@ class Card:
 
         Regresa un objeto de la clase :class:`ft.Container`
         """
+
+        # Cuadro de lecturas on'yomi en una objeto de la clase ft.Card
+        self._onyomi_readings: ft.Card = ft.Card(
+            expand = True,
+            elevation = 0,
+            color = styles["card"]["color"], 
+            content = ft.Container(
+                border_radius = ft.border_radius.all(20),
+                content = ft.Column(
+                    spacing = styles["on_kun"]["spacing"],
+                    controls = [
+                        # On'yomi
+                        ft.Container(
+                            alignment = ft.alignment.center,
+                            content = ft.Text(
+                                "On'yomi",
+                                font_family = styles["text"]["font"],
+                                size = styles["on_kun"]["size"],
+                                color = styles["text"]["color"],
+                                weight = ft.FontWeight.W_300,
+                                text_align = ft.TextAlign.CENTER
+                            )
+                        ),
+                        # Lecturas
+                        ft.Container(
+                            alignment = ft.alignment.center,
+                            content = Card._build_onyomi_list(kanji)
+                        )
+                    ]
+                ),
+                on_click = lambda _: audio.read(kanji.onyomi),
+                on_hover = lambda _: self._onyomi_readings_on_hover(_)
+            )
+        )
+
+        # Cuadro de lecturas kun'yomi en una objeto de la clase ft.Card
+        self._kunyomi_readings: ft.Card = ft.Card(
+            expand = True,
+            elevation = 0,
+            color = styles["card"]["color"], 
+            content = ft.Container(
+                border_radius = ft.border_radius.all(20),
+                content = ft.Column(
+                    spacing = styles["on_kun"]["spacing"],
+                    controls = [
+                        # Kun'yomi
+                        ft.Container(
+                            alignment = ft.alignment.center,
+                            content = ft.Text(
+                                "Kun'yomi",
+                                font_family = styles["text"]["font"],
+                                size = styles["on_kun"]["size"],
+                                color = styles["text"]["color"],
+                                weight = ft.FontWeight.W_300,
+                                text_align = ft.TextAlign.CENTER
+                            )
+                        ),
+                        # Lecturas
+                        ft.Container(
+                            alignment = ft.alignment.center,
+                            content = Card._build_kunyomi_list(kanji)
+                        )
+                    ]
+                ),
+                on_click = lambda _: audio.read(kanji.kunyomi),
+                on_hover = lambda _: self._kunyomi_readings_on_hover(_)
+            )
+        )
 
         self._card: ft.Container = ft.Container(
             border_radius = ft.border_radius.all(40),
@@ -133,7 +216,7 @@ class Card:
                             ft.Container(
                                 height = styles["kanji"]["height"],
                                 width = styles["kanji"]["width"],
-                                offset = ft.Offset(0, -0.075),
+                                offset = ft.Offset(0, -0.070),
                                 alignment = ft.alignment.top_center,
                                 content = ft.Column(
                                     controls = [
@@ -155,68 +238,14 @@ class Card:
                     ),
                     # On'yomi y kun'yomi
                     ft.Row(
-                        offset = ft.Offset(0, -0.4),
+                        expand = True,
+                        offset = ft.Offset(0, -0.35),
+                        alignment = ft.MainAxisAlignment.SPACE_EVENLY,
                         controls = [
                             # Columna de on'yomi
-                            ft.Container(
-                                expand = True,
-                                height = 150,
-                                border_radius = ft.border_radius.all(20),
-                                content = ft.Column(
-                                    spacing = styles["on_kun"]["spacing"],
-                                    controls = [
-                                        # On'yomi
-                                        ft.Container(
-                                            alignment = ft.alignment.center,
-                                            content = ft.Text(
-                                                "On'yomi",
-                                                font_family = styles["text"]["font"],
-                                                size = styles["on_kun"]["size"],
-                                                color = styles["text"]["color"],
-                                                weight = ft.FontWeight.W_300,
-                                                text_align = ft.TextAlign.CENTER
-                                            )
-                                        ),
-                                        # Lecturas
-                                        ft.Container(
-                                            alignment = ft.alignment.center,
-                                            content = Card._build_onyomi_list(kanji)
-                                        )
-                                    ]
-                                ),
-                                on_click = lambda _: audio.read(kanji.onyomi),
-                                on_hover = Card._on_hover
-                            ),
+                            self._onyomi_readings,
                             # Columna de kun'yomi
-                            ft.Container(
-                                expand = True,
-                                height = 150,
-                                border_radius = ft.border_radius.all(20),
-                                content = ft.Column(
-                                    spacing = styles["on_kun"]["spacing"],
-                                    controls = [
-                                        # Kun'yomi
-                                        ft.Container(
-                                            alignment = ft.alignment.center,
-                                            content = ft.Text(
-                                                "Kun'yomi",
-                                                font_family = styles["text"]["font"],
-                                                size = styles["on_kun"]["size"],
-                                                color = styles["text"]["color"],
-                                                weight = ft.FontWeight.W_300,
-                                                text_align = ft.TextAlign.CENTER
-                                            )
-                                        ),
-                                        # Lecturas
-                                        ft.Container(
-                                            alignment = ft.alignment.center,
-                                            content = Card._build_kunyomi_list(kanji)
-                                        )
-                                    ]
-                                ),
-                                on_click = lambda _: audio.read(kanji.kunyomi),
-                                on_hover = Card._on_hover
-                            )
+                            self._kunyomi_readings
                         ]
                     )
                 ]
@@ -226,7 +255,7 @@ class Card:
         return self._card
 
 
-    def build_simple_card(self, kanji: Kanji) -> ft.Container:
+    def build_simple_card(self, kanji: Kanji) -> ft.Card:
         """
         Construye la tarjeta del kanji a partir de un objeto de la clase :class:`Kanji`
 
@@ -234,7 +263,7 @@ class Card:
 
         Recibe un objeto de la clase :class:`Kanji` como parámetro
 
-        Regresa un objeto de la clase :class:`ft.Container`
+        Regresa un objeto de la clase :class:`ft.Card`
         """
 
         self._card: ft.Container = ft.Container(
@@ -273,7 +302,12 @@ class Card:
                     )
                 ]
             ),
-            on_hover = Card._light_card_on_hover if kanji.id % 2 == 0 else Card._dark_card_on_hover
+            on_hover = lambda _: self._simple_card_on_hover(_)
+        )
+
+        self._card: ft.Card = ft.Card(
+            elevation = 0,
+            content = self._card
         )
 
         return self._card

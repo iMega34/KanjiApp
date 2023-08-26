@@ -16,7 +16,7 @@ styles: dict = {
         "height" : 60,
         "border_radius" : 50,
         "color" : "#DBD1A7",
-        "sec_color" : "#E9E1C0",
+        "bgcolor" : "#D9D9D9",
         "home_color" : "#4AB8FC",
         "exit_color" : "#FF0000",
         "icon_size" : 40
@@ -33,18 +33,95 @@ class NavBar:
     usada en las ventanas de la aplicación
     """
 
-    def _on_hover(_: ft.HoverEvent) -> None:
+    def __init__(self) -> None:
+        self._nav_bar = ft.Container()
+
+
+    def _home_button_on_hover(self, _: ft.HoverEvent) -> None:
         """
-        Permite a los botones cambiar de color al pasar el cursor sobre ellos
+        Permite al botón de regreso al menú principal elevarse cuando el cursor pasa sobre él
         """
 
-        _.control.bgcolor = styles["buttons"]["sec_color"] if _.data == "true" else styles["buttons"]["color"]
-        _.control.update()
+        if _.data == "true":
+            for __ in range(20):
+                self._home_button.elevation += 1
+                self._home_button.update()
+
+        else:
+            for __ in range(20):
+                self._home_button.elevation -= 1
+                self._home_button.update()
 
 
-    def nav_bar(page: ft.Page) -> ft.Container:
+    def _home_button_on_click(self, page: ft.Page, _: ft.ControlEvent) -> None:
+        """
+        Permite regresar al menú principal al dar clic sobre el botón y regresa el botón a su estado
+        original
+        """
 
-        nav_bar_content: ft.Container = ft.Container(
+        self._home_button.elevation = 0
+
+        page.go('/')
+
+
+    def _exit_button_on_hover(self, _: ft.HoverEvent) -> None:
+        """
+        Permite al botón de salida de la aplicación elevarse cuando el cursor pasa sobre él
+        """
+
+        if _.data == "true":
+            for __ in range(20):
+                self._exit_button.elevation += 1
+                self._exit_button.update()
+
+        else:
+            for __ in range(20):
+                self._exit_button.elevation -= 1
+                self._exit_button.update()
+
+
+    def nav_bar(self, page: ft.Page) -> ft.Container:
+        """
+        Barra de navegación que se utiliza en las ventanas de la aplicación
+
+        Regresa un objeto de la clase :class:`ft.Container`
+        """
+
+        self._home_button: ft.Card = ft.Card(
+            elevation = 0,
+            color = styles['buttons']['color'],
+            content = ft.Container(
+                width = styles['buttons']['width'],
+                height = styles['buttons']['height'],
+                alignment = ft.alignment.center,
+                content = ft.Icon(
+                    name = ft.icons.HOUSE,
+                    color = styles['buttons']['home_color'],
+                    size = styles['buttons']['icon_size']
+                ),
+                on_hover = lambda _: self._home_button_on_hover(_),
+                on_click = lambda _: self._home_button_on_click(page, _)
+            )
+        )
+
+        self._exit_button: ft.Card = ft.Card(
+            elevation = 0,
+            color = styles['buttons']['color'],
+            content = ft.Container(
+                width = styles['buttons']['width'],
+                height = styles['buttons']['height'],
+                alignment = ft.alignment.center,
+                content = ft.Icon(
+                    name = ft.icons.CANCEL,
+                    color = styles['buttons']['exit_color'],
+                    size = styles['buttons']['icon_size']
+                ),
+                on_hover = lambda _: self._exit_button_on_hover(_),
+                on_click = lambda _: page.window_destroy()
+            )
+        )
+
+        self._nav_bar: ft.Container = ft.Container(
             expand = True,
             height = styles['bar']['height'],
             content = ft.Row(
@@ -63,39 +140,11 @@ class NavBar:
                         )
                     ),
                     # Botón de regreso al menú principal
-                    ft.Container(
-                        width = styles['buttons']['width'],
-                        height = styles['buttons']['height'],
-                        border_radius = ft.border_radius.all(styles['buttons']['border_radius']),
-                        bgcolor = styles['buttons']['color'],
-                        alignment = ft.alignment.center,
-                        offset = ft.Offset(-0.3, 0),
-                        content = ft.Icon(
-                            name = ft.icons.HOUSE,
-                            color = styles['buttons']['home_color'],
-                            size = styles['buttons']['icon_size']
-                        ),
-                        on_hover = NavBar._on_hover,
-                        on_click = lambda _: page.go('/')
-                    ),
+                    self._home_button,
                     # Botón para salir de la aplicación
-                    ft.Container(
-                        width = styles['buttons']['width'],
-                        height = styles['buttons']['height'],
-                        border_radius = ft.border_radius.all(styles['buttons']['border_radius']),
-                        bgcolor = styles['buttons']['color'],
-                        alignment = ft.alignment.center,
-                        offset = ft.Offset(-0.3, 0),
-                        content = ft.Icon(
-                            name = ft.icons.CANCEL,
-                            color = styles['buttons']['exit_color'],
-                            size = styles['buttons']['icon_size']
-                        ),
-                        on_hover = NavBar._on_hover,
-                        on_click = lambda _: page.window_destroy()
-                    )
+                    self._exit_button
                 ]
             )
         )
 
-        return nav_bar_content
+        return self._nav_bar

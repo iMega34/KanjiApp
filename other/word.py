@@ -11,10 +11,9 @@ styles: dict = {
         "font" : "Sawarabi Mincho",
         "size" : 30,
         "height" : 75,
-        "width" : 500,
+        "width" : 520,
         "padding" : 10,
         "color" : "#AED8E5",
-        "sec_color" : "#D2E5EB",
     }
 }
 
@@ -31,33 +30,43 @@ class Word:
         self._word = ft.Container()
 
 
-    def _on_hover(_: ft.HoverEvent) -> None:
+    def _on_hover(self, _: ft.HoverEvent) -> None:
         """
-        Permite a la tarjeta cambiar de color al pasar el cursor sobre ella
+        Permite a la tarjeta elevarse al pasar el cursor sobre ella
         """
 
-        _.control.bgcolor = styles["word_card"]["sec_color"] if _.data == "true" else styles["word_card"]["color"]
-        _.control.update()
+        if _.data == "true":
+            for __ in range(20):
+                self._word.elevation += 1
+                self._word.update()
+
+        else:
+            for __ in range(20):
+                self._word.elevation -= 1
+                self._word.update()
 
 
-    def build_word(self, word_kanji: str, word_kana: str, meaning: str) -> ft.Container:
+    def build_word(self, word_kanji: str, word_kana: str, meaning: str) -> ft.Card:
         """
         Construye una tarjeta de una palabra a partir de un objeto de la clase :class:`Kanji`
 
-        Regresa un objeto de la clase :class:`ft.Container`
+        Regresa un objeto de la clase :class:`ft.Card`
         """
 
-        self._word: ft.Container = ft.Container(
+        # Contenido de la tarjeta de la palabra
+        self._content: ft.Container = ft.Container(
+            border_radius = ft.border_radius.all(10),
             height = styles["word_card"]["height"],
             width = styles["word_card"]["width"],
-            border_radius = ft.border_radius.all(10),
             bgcolor = styles["word_card"]["color"],
             padding = styles["word_card"]["padding"],
+            # Controles de la tarjeta
             content = ft.Row(
                 scroll = True,
                 auto_scroll = True,
                 on_scroll_interval = 0.1,
                 controls = [
+                    # Palabra en japonés y su traducción
                     ft.Container(
                         alignment = ft.alignment.center,
                         content = ft.Text(
@@ -67,12 +76,19 @@ class Word:
                             color = styles["text"]["color"],
                             weight = ft.FontWeight.W_300,
                             text_align = ft.TextAlign.CENTER,
+                            selectable = True,
                             no_wrap = True,
                         )
                     )
                 ]
             ),
-            on_hover = Word._on_hover,
+            on_hover = lambda _: self._on_hover(_),
+        )
+
+        # Tarjeta de la palabra
+        self._word: ft.Card = ft.Card(
+            elevation = 0,
+            content = self._content
         )
 
         return self._word

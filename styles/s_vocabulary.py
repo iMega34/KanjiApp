@@ -26,7 +26,7 @@ styles: dict = {
     "list_view" : {
         "spacing" : 10,
         "padding" : 10,
-        "width" : 550,
+        "width" : 570,
         "height" : 450
     },
     "search_bar" : {
@@ -34,7 +34,7 @@ styles: dict = {
         "size" : 15,
         "button_height" : 53,
         "button_width" : 53,
-        "text_field_width" : 1045,
+        "text_field_width" : 1080,
         "bgcolor" : "#DBD1A7",
         "border_color" : "#A39768",
         "cursor_color" : "#537B79",
@@ -153,8 +153,6 @@ class SVocabulary:
         Regresa un objeto de la clase :class:`ft.Row`
         """
 
-        column = 1
-
         # Se crean objetos de la clase ft.ListView para contener las tarjetas de vocabulario:
         # list_view_1 sería la columna izquierda y list_view_2 la columna derecha 
         list_view_1: ft.ListView = ft.ListView(
@@ -170,9 +168,11 @@ class SVocabulary:
             height = styles["list_view"]["height"]
         )
 
+        column = 1
+
         # Se agregan tarjetas de vocabulario al objeto de la clase ft.ListView
         for kanji, kana, meaning in zip(vocab_dict['word_kanji'], vocab_dict['word_kana'], vocab_dict['meaning']):
-            word: ft.Container = Word().build_word(kanji, kana, meaning)
+            word: ft.Card = Word().build_word(kanji, kana, meaning)
             if column == 1:
                 list_view_1.controls.append(word)
                 column = 2
@@ -180,6 +180,8 @@ class SVocabulary:
                 list_view_2.controls.append(word)
                 column = 1
 
+        # Se colocan los objetos list_view_1 y list_view_2, de la clase ft.ListView, en un objeto de la clase ft.Row
+        # para contruir la lista de vocabulario
         vocab_content: ft.Row = ft.Row(
             alignment = ft.MainAxisAlignment.CENTER,
             spacing = 15,

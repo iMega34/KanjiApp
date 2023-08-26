@@ -19,7 +19,7 @@ def Welcome(page: ft.Page) -> ft.Column:
     # Nombre de la aplicación
     app_name: ft.Container = SWelcome.app_name()
     # Botón para salir de la aplicación
-    exit_button: ft.Container = SWelcome.exit_button(page)
+    exit_button: ft.Container = SWelcome().exit_button(page)
     # Mensaje de bienvenida
     subtitle: ft.Container = SWelcome.subtitle()
     # Fila de botones de redireccionamiento de ventana

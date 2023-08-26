@@ -29,7 +29,6 @@ styles: dict = {
         "height" : 60,
         "border_radius" : 50,
         "color" : "#DBD1A7",
-        "sec_color" : "#E9E1C0",
         "exit_color" : "#FF0000",
         "icon_size" : 40
     }
@@ -42,42 +41,53 @@ class SWelcome:
     del archivo :file:`welcome.py` para la creación de la ventana de bienvenida
     """
 
-    def _on_hover(_: ft.HoverEvent) -> None:
+    def _on_hover(self, _: ft.HoverEvent) -> None:
         """
         Permite a los botones cambiar de color al pasar el cursor sobre ellos
         """
 
-        _.control.bgcolor = styles["exit_button"]["sec_color"] if _.data == "true" else styles["exit_button"]["color"]
-        _.control.update()
+        if _.data == "true":
+            for __ in range(20):
+                self._exit_button.elevation += 1
+                self._exit_button.update()
+        else:
+            for __ in range(20):
+                self._exit_button.elevation -= 1
+                self._exit_button.update()
 
 
-    def exit_button(page: ft.Page) -> ft.Container:
+    def exit_button(self, page: ft.Page) -> ft.Card:
         """
         Botón para salir de la aplicación
 
         Recibe un objeto de la clase :class:`ft.Page` para poder
         realizar el cierre de la ventana
 
-        Regresa un objeto de la clase :class:`ft.Container`
+        Regresa un objeto de la clase :class:`ft.Card`
         """
 
-        exit_button_content: ft.Container = ft.Container(
+        self._exit_button_content: ft.Container = ft.Container(
             width = styles["exit_button"]["width"],
             height = styles["exit_button"]["height"],
             border_radius = ft.border_radius.all(styles["exit_button"]["border_radius"]),
             bgcolor = styles["exit_button"]["color"],
             alignment = ft.alignment.center,
-            offset = ft.Offset(-0.3, 0),
             content = ft.Icon(
                 name = ft.icons.CANCEL,
                 color = styles["exit_button"]["exit_color"],
                 size = styles["exit_button"]["icon_size"]
             ),
-            on_hover = SWelcome._on_hover,
+            on_hover = lambda _: self._on_hover(_),
             on_click = lambda _: page.window_destroy()
         )
 
-        return exit_button_content
+        self._exit_button: ft.Card = ft.Card(
+            elevation = 0,
+            color = styles["exit_button"]["color"],
+            content = self._exit_button_content
+        )
+
+        return self._exit_button
 
 
     def app_name() -> ft.Container:
