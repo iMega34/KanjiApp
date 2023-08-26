@@ -1,5 +1,6 @@
 
 import flet as ft
+from time import sleep
 
 from other.kanji import Kanji
 from other.audio_engine import AudioEngine
