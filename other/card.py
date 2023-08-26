@@ -1,6 +1,5 @@
 
 import flet as ft
-from time import sleep
 
 from other.kanji import Kanji
 from other.audio_engine import AudioEngine
@@ -43,7 +42,6 @@ styles: dict = {
         "width" : 530,
         "padding" : 25,
         "color" : "#D2E5EB",
-        "sec_color" : "#B4E3EC",
         "shadow_color" : "#A6A6A6"
     },
     "simple_card" : {

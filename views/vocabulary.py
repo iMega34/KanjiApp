@@ -54,7 +54,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
         return vocabulary
 
 
-    def new_search(func) -> None:
+    def new_search(_) -> None:
         """
         Procesa la entrada de texto de la barra de búsqueda y actualiza la columna con el vocabulario encontrado
         """

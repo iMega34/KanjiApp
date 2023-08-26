@@ -18,7 +18,7 @@ def LearnKanji(page: ft.Page) -> ft.Container:
     Regresa un objeto de la clase :class:`ft.Container`
     """
 
-    def next_kanji(func):
+    def next_kanji(_):
         """
         Muestra el siguiente kanji en la lista de kanjis
 
@@ -37,7 +37,7 @@ def LearnKanji(page: ft.Page) -> ft.Container:
         page.update()
 
 
-    def prev_kanji(func):
+    def prev_kanji(_):
         """
         Muestra el kanji anterior en la lista de kanjis
 

@@ -56,7 +56,7 @@ class SLearnKanji:
     del archivo :file:`learn_kanji.py` para la creación de la ventana de aprendizaje
     de kanjis
 
-    Se apoya de las clases :class:`Card`, del archivo :file:`card.py`, y :class:`Vocabulary`,
+    Se apoya de las clases :class:`Card`, del archivo :file:`card.py`, y :class:`Word`,
     del archivo :file:`word.py`, para la creación de los controles utilizados en la ventana
     """
 

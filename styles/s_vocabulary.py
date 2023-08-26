@@ -91,7 +91,7 @@ class SVocabulary:
 
     def search_bar() -> ft.Container:
         """
-        Barra de búsqueda de vocabulario por medio de un kanji o una serie de palabras
+        Barra de búsqueda de vocabulario por medio de un kanji o una serie de caracteres
 
         Regresa un objeto de la clase :class:`ft.Container`
         """

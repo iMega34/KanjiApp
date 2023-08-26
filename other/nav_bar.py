@@ -16,7 +16,6 @@ styles: dict = {
         "height" : 60,
         "border_radius" : 50,
         "color" : "#DBD1A7",
-        "bgcolor" : "#D9D9D9",
         "home_color" : "#4AB8FC",
         "exit_color" : "#FF0000",
         "icon_size" : 40
