@@ -32,7 +32,7 @@ def LearnKanji(page: ft.Page) -> ft.Container:
             SLearnKanji._counter = 0
 
         kanji_card.content = SLearnKanji.kanji_card()
-        kanji_vocab.content.controls[0] = SLearnKanji.kanji_vocab()
+        kanji_vocab.content = SLearnKanji.kanji_vocab()
 
         page.update()
 
@@ -51,7 +51,7 @@ def LearnKanji(page: ft.Page) -> ft.Container:
             SLearnKanji._counter = len(kanjis) - 1
 
         kanji_card.content = SLearnKanji.kanji_card()
-        kanji_vocab.content.controls[0] = SLearnKanji.kanji_vocab()
+        kanji_vocab.content = SLearnKanji.kanji_vocab()
 
         page.update()
 
