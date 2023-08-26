@@ -101,7 +101,8 @@ class SWelcome:
                             color = styles["text"]["color"],
                             weight = ft.FontWeight.W_300,
                             text_align = ft.TextAlign.CENTER
-                        )
+                        ),
+                        on_click = lambda _: page.go('/kanji_list')
                     ),
                     # Botón hacia la ventana de aprendizaje
                     ft.ElevatedButton(

@@ -49,9 +49,12 @@ class NavBar:
             height = styles['bar']['height'],
             content = ft.Row(
                 controls = [
+                    # Nombre de la aplicación en la barra de navegación
                     ft.Container(
                         expand = True,
                         height = styles['bar']['height'],
+                        alignment = ft.alignment.center_left,
+                        offset = ft.Offset(0.025, 0),
                         content = ft.Text(
                             "KanjiApp",
                             font_family = styles['title']['font'],
@@ -59,12 +62,14 @@ class NavBar:
                             color = styles['text']['color'],
                         )
                     ),
+                    # Botón de regreso al menú principal
                     ft.Container(
                         width = styles['buttons']['width'],
                         height = styles['buttons']['height'],
                         border_radius = ft.border_radius.all(styles['buttons']['border_radius']),
                         bgcolor = styles['buttons']['color'],
                         alignment = ft.alignment.center,
+                        offset = ft.Offset(-0.3, 0),
                         content = ft.Icon(
                             name = ft.icons.HOUSE,
                             color = styles['buttons']['home_color'],
@@ -73,12 +78,14 @@ class NavBar:
                         on_hover = NavBar._on_hover,
                         on_click = lambda _: page.go('/')
                     ),
+                    # Botón para salir de la aplicación
                     ft.Container(
                         width = styles['buttons']['width'],
                         height = styles['buttons']['height'],
                         border_radius = ft.border_radius.all(styles['buttons']['border_radius']),
-                        alignment = ft.alignment.center,
                         bgcolor = styles['buttons']['color'],
+                        alignment = ft.alignment.center,
+                        offset = ft.Offset(-0.3, 0),
                         content = ft.Icon(
                             name = ft.icons.CANCEL,
                             color = styles['buttons']['exit_color'],
