@@ -87,6 +87,8 @@ def LearnKanji(page: ft.Page) -> ft.Container:
         # - Columna con el vocabulario relacionado al kanji
         # - Botón para generar un nuevo kanji
         content = ft.Column(
+            expand = True,
+            spacing = 15,
             controls = [
                 # Barra de navegación
                 ft.Row(
