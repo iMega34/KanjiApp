@@ -25,8 +25,10 @@ def KanjiList(page: ft.Page) -> ft.Container:
     # Título de la ventana
     title: ft.Container = SKanjiList.title()
 
+    # Columna de la tabla de kanjis
+    kanji_list: ft.Container = SKanjiList.kanji_list()
+
     window: ft.Container = ft.Container(
-        border = ft.border.all(1, "#FF0000"),
         expand = True,
         # Se compone de:
         # - Barra de navegación
@@ -45,6 +47,13 @@ def KanjiList(page: ft.Page) -> ft.Container:
                 ft.Row(
                     controls = [
                         title
+                    ]
+                ),
+                # Columna de la tabla de kanjis
+                ft.Row(
+                    alignment = ft.MainAxisAlignment.CENTER,
+                    controls = [
+                        kanji_list
                     ]
                 )
             ]
