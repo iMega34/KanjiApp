@@ -6,6 +6,7 @@ from other.word import Word
 from other.card import Card
 from other.kanji import Kanji
 from other.kanji_table import KanjiTable
+from database.database import Database
 
 
 # Lista de kanjis
@@ -62,35 +63,24 @@ class SLearnKanji:
 
     _counter: int = 0
 
-    def _search_vocab(kanji: str) -> dict[str, list[str]]:
+    def _search_vocab(kanji: str) -> dict[list[str], list[str]]:
         """
         Busca palabras asociada al kanji que se pasa como parámetro
 
         Recibe un objeto de la clase :class:`str`
 
-        Regresa un diccionario con las primeras 50 palabras encontradas en el diccionario JMDict
+        Regresa un diccionario con las palabras encontradas en el vocabulario de Genki 3rd Edition
         """
 
         # Se crea un objeto de la clase Jamdict, pero se utiliza el método lookup_iter para buscar
         # palabras asociadas al kanji que se pasa como parámetro, ya que este método regresa un iterador,
         # lo que permite encontrar las palabras de una manera más rápida y eficiente
-        jam = Jamdict()
-        result = jam.lookup_iter(f'%{kanji}%', strict_lookup = True)
+        # jam = Jamdict()
+        # result = jam.lookup_iter(f'%{kanji}%', strict_lookup = True)
 
-        # Diccionario que almacenará las palabras encontradas
-        vocabulary: dict[str, list[str]] = {
-            "word_kana" : [],
-            "word_kanji" : [],
-            "meaning" : []
-        }
-
-        for count, entry in enumerate(result.entries):
-            if count < 50:
-                vocabulary['word_kana'].append(entry.kana_forms[0])
-                vocabulary['word_kanji'].append(entry.kanji_forms[0])
-                vocabulary['meaning'].append(entry.senses[0].gloss[0])
-            else:
-                break
+        # Se crea un objeto de la clase Database para buscar las palabras asociadas al kanji que se pasa como parámetro
+        database = Database()
+        vocabulary = database.search_vocab(kanji)
 
         return vocabulary
 
@@ -173,8 +163,8 @@ class SLearnKanji:
         )
 
         # Se agregan tarjetas de vocabulario al objeto de la clase ft.ListView
-        for kanji, kana, meaning in zip(vocab_dict['word_kanji'], vocab_dict['word_kana'], vocab_dict['meaning']):
-            word: ft.Container = Word().build_word(kanji, kana, meaning)
+        for kanji, meaning in zip(vocab_dict['kanji'], vocab_dict['meaning']):
+            word: ft.Container = Word().build_word(kanji, meaning)
             list_view.controls.append(word)
 
         # Se coloca el objeto list_view, de la clase ft.ListView, en un objeto de la clase ft.Container

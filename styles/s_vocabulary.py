@@ -171,8 +171,8 @@ class SVocabulary:
         column = 1
 
         # Se agregan tarjetas de vocabulario al objeto de la clase ft.ListView
-        for kanji, kana, meaning in zip(vocab_dict['word_kanji'], vocab_dict['word_kana'], vocab_dict['meaning']):
-            word: ft.Card = Word().build_word(kanji, kana, meaning)
+        for kanji, meaning in zip(vocab_dict['kanji'], vocab_dict['meaning']):
+            word: ft.Card = Word().build_word(kanji, meaning)
             if column == 1:
                 list_view_1.controls.append(word)
                 column = 2

@@ -1,6 +1,7 @@
 
 import flet as ft
 from jamdict import Jamdict
+from database.database import Database
 
 from styles.s_vocabulary import SVocabulary
 from other.nav_bar import NavBar
@@ -21,35 +22,24 @@ def Vocabulary(page: ft.Page) -> ft.Container:
     Regresa un objeto de la clase :class:`ft.Container`
     """
 
-    def _search_vocab(kanji: str) -> dict[str, list[str]]:
+    def _search_vocab(kanji: str) -> dict[list[str], list[str]]:
         """
         Busca palabras asociada al kanji que se pasa como parámetro
 
         Recibe un objeto de la clase :class:`str`
 
-        Regresa un diccionario con las primeras 50 palabras encontradas en el diccionario JMDict
+        Regresa un diccionario con las palabras encontradas en el vocabulario de Genki 3rd Edition
         """
 
         # Se crea un objeto de la clase Jamdict, pero se utiliza el método lookup_iter para buscar
         # palabras asociadas al kanji que se pasa como parámetro, ya que este método regresa un iterador,
         # lo que permite encontrar las palabras de una manera más rápida y eficiente
-        jam = Jamdict()
-        result = jam.lookup_iter(f'%{kanji}%', strict_lookup = True)
+        # jam = Jamdict()
+        # result = jam.lookup_iter(f'%{kanji}%', strict_lookup = True)
 
-        # Diccionario que almacenará las palabras encontradas
-        vocabulary: dict[str, list[str]] = {
-            "word_kana" : [],
-            "word_kanji" : [],
-            "meaning" : []
-        }
-
-        for count, entry in enumerate(result.entries):
-            if count < 50:
-                vocabulary['word_kana'].append(entry.kana_forms[0])
-                vocabulary['word_kanji'].append(entry.kanji_forms[0])
-                vocabulary['meaning'].append(entry.senses[0].gloss[0])
-            else:
-                break
+        # Se crea un objeto de la clase Database para buscar las palabras asociadas al kanji que se pasa como parámetro
+        database = Database()
+        vocabulary = database.search_vocab(kanji)
 
         return vocabulary
 

@@ -46,7 +46,7 @@ class Word:
                 self._word.update()
 
 
-    def build_word(self, word_kanji: str, word_kana: str, meaning: str) -> ft.Card:
+    def build_word(self, word_kanji: str, meaning: str) -> ft.Card:
         """
         Construye una tarjeta de una palabra a partir de un objeto de la clase :class:`Kanji`
 
