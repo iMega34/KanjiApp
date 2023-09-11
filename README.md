@@ -27,7 +27,7 @@ pip install flet, pyttsx3, pandas, pyinstaller
 La aplicación cuenta con 3 opciones:
   - **Aprender**: En esta opción se puede aprender los kanjis guardados en el archivo _kanji.xlsx_, además de ver vocabulario relacionado al kanji.
   - **Lista de kanjis**: En esta opción se puede ver la lista de kanjis guardados en el archivo _kanji.xlsx_.
-  - **Vocabulario**: En esta opción se puede ver el vocabulario almacenado en la base de datos de la aplicación. Cuenta con la posibilidad de bsucar por kanji.
+  - **Vocabulario**: En esta opción se puede ver el vocabulario almacenado en la base de datos de la aplicación. Cuenta con la posibilidad de buscar por kanji.
     - **Importante**: La base de datos se limita al vocabulario al utilizado por el libro de texto _Genki 3rd Edition_ de la editorial _The Japan Times_. Por lo que se si quiere agregar más vocabulario, se debe habilitar manualmente la base de datos de _JamDict_ (Favor de contactarme para llevar a cabo este proceso).
 
 ### Aprender
@@ -50,7 +50,7 @@ En esta ventana se puede ver el vocabulario almacenado en la base de datos de la
 
 ## Información de contacto
 
-Para cualquier duda o comentario, favor de contactarme a mi correo electrónico. La retrolamentación es bienvenida ya que dediqué un buen tiempo a este proyecto y me gustaría saber que opinan de él.
+Para cualquier duda o comentario, favor de contactarme a mi correo electrónico. La retroalimentación es bienvenida ya que dediqué un buen tiempo a este proyecto y me gustaría saber que opinan de él.
 
   - **Nombre**: Erick Daniel Ortiz Cervantes
   - **Correo**: A01750495@tec.mx
