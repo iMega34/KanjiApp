@@ -34,7 +34,7 @@ La aplicación cuenta con 3 opciones:
 
 ![image](/assets/aprender.png "Aprender")
 
-La ventana más importante de la aplicación, en esta se puede aprender los kanjis guardados en el archivo _kanji.xlsx_, además de ver vocabulario relacionado al kanji.
+La ventana más importante de la aplicación, en esta se puede aprender los kanjis guardados en el archivo _kanji.xlsx_, además de ver vocabulario relacionado al kanji. Si se da click en alguna de las lecturas del kanji ¡la aplicación la leerá por ti!
 
 ### Lista de kanjis
 
