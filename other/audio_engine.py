@@ -48,7 +48,22 @@ class AudioEngine:
             print(f"{id + 1}: {voice.name} \t ID: {voice.id}")
 
 
-    def read(self, readings: list[str]) -> None:
+    def read_readings(self, readings: list[str]) -> None:
+        """
+        Realiza la lectura del texto que se pasa como parámetro
+
+        Recibe una lista con texto como parámetro y lo lee en voz alta con la voz que se haya pasado en el constructor
+        """
+
+        self.engine.startLoop(False)
+        # Convierte la lista de palabras en una cadena de texto separada por comas
+        readings = ", ".join(readings)
+        self.engine.say(readings)
+        self.engine.iterate()
+        self.engine.endLoop()
+
+
+    def read_text(self, text: str) -> None:
         """
         Realiza la lectura del texto que se pasa como parámetro
 
@@ -56,8 +71,6 @@ class AudioEngine:
         """
 
         self.engine.startLoop(False)
-        # Convierte la lista de palabras en una cadena de texto separada por comas
-        readings = ", ".join(readings)
-        self.engine.say(readings)
+        self.engine.say(text)
         self.engine.iterate()
         self.engine.endLoop()

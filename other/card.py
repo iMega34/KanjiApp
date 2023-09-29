@@ -155,7 +155,7 @@ class Card:
                         )
                     ]
                 ),
-                on_click = lambda _: audio.read(kanji.onyomi),
+                on_click = lambda _: audio.read_readings(kanji.onyomi),
                 on_hover = lambda _: self._onyomi_readings_on_hover(_)
             )
         )
@@ -189,7 +189,7 @@ class Card:
                         )
                     ]
                 ),
-                on_click = lambda _: audio.read(kanji.kunyomi),
+                on_click = lambda _: audio.read_readings(kanji.kunyomi),
                 on_hover = lambda _: self._kunyomi_readings_on_hover(_)
             )
         )

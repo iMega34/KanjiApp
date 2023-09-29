@@ -1,6 +1,8 @@
 
 import flet as ft
 
+from other.audio_engine import AudioEngine
+
 
 # Estilos usados por los controles que componen la ventana
 styles: dict = {
@@ -16,6 +18,9 @@ styles: dict = {
         "color" : "#AED8E5",
     }
 }
+
+# Motor de audio para la pronunciación de las palabras
+audio: AudioEngine = AudioEngine("JA-JP_HARUKA_11.0")
 
 
 class Word:
@@ -48,7 +53,8 @@ class Word:
 
     def build_word(self, word_kanji: str, meaning: str) -> ft.Card:
         """
-        Construye una tarjeta de una palabra a partir de un objeto de la clase :class:`Kanji`
+        Construye una tarjeta de una palabra a partir de un objeto de la clase :class:`Kanji`.
+        Permite leer la palabra en japonés en voz alta.
 
         Regresa un objeto de la clase :class:`ft.Card`
         """
@@ -82,6 +88,7 @@ class Word:
                     )
                 ]
             ),
+            on_click = lambda _: audio.read_text(word_kanji),
             on_hover = lambda _: self._on_hover(_),
         )
 

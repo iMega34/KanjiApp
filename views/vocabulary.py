@@ -11,7 +11,7 @@ def Vocabulary(page: ft.Page) -> ft.Container:
     """
     Ventana de vocabulario
 
-    Se muestra una columna con las primeras 50 palabras que se encuentren en el diccionario JMDict, además
+    Se muestra una columna con todas las palabras que se encuentren en el diccionario de Genki 3rd Edition, además
     de una barra de busqueda donde se introduce un kanji para buscar palabras asociadas a él o palabras, y los
     resultados de la búsqueda se mostrarán en la columna
 
