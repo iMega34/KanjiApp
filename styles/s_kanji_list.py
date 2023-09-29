@@ -92,8 +92,10 @@ class SKanjiList:
                     kanji_card: ft.Card = Card().build_simple_card(kanjis[_counter])
                     list_row.controls.append(kanji_card)
                     _counter += 1
+
                 except IndexError:
                     break
+
             list_view.controls.append(list_row)
 
         # Se coloca el objeto list_view, de la clase ft.ListView, en un objeto de la clase ft.Container

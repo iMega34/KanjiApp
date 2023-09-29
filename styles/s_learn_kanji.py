@@ -1,6 +1,6 @@
 
 import flet as ft
-from jamdict import Jamdict
+# from jamdict import Jamdict
 
 from other.word import Word
 from other.card import Card
