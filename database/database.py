@@ -83,6 +83,9 @@ class Database:
         ).fetchall()
 
         for result in list_search_results:
+            if result[0] in self.search_results['kanji']:
+                continue
+
             self.search_results['kanji'].append(result[0])
             self.search_results['meaning'].append(result[1])
 
