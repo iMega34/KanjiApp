@@ -15,7 +15,7 @@ Los kanjis pueden facilmente ser agregados o modificados en el archivo _kanji.xl
   - Requiere PyInstaller v5.7.0 o superior
 
 ```python
-pip install flet, pyttsx3, pandas, pyinstaller
+pip install flet pyttsx3 pandas pyinstaller openpyxl
 ```
 
 ## Preview de la aplicación:
