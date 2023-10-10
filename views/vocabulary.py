@@ -1,6 +1,6 @@
 
 import flet as ft
-from jamdict import Jamdict
+# from jamdict import Jamdict
 from database.database import Database
 
 from styles.s_vocabulary import SVocabulary
